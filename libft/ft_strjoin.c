@@ -12,44 +12,31 @@
 
 #include "libft.h"
 
-static char	*ft_join(unsigned long int i, char \
-*result, char const *s1, char const *s2)
-{	
-	int	lon;
-
-	lon = 0;
-	while (i < (ft_strlen(s1) + ft_strlen(s2)))
-	{	
-		while (s1[i])
-		{
-			result[i] = s1[i];
-			i++;
-		}
-		while (s2[lon])
-		{
-			result[i] = s2[lon];
-			i++;
-			lon++;
-		}
-	}
-	result[i] = '\0';
-	return (result);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char				*result;
-	int					lon;
-	unsigned long int	i;
+	char	*str;
+	char	*res;
+	size_t	len;
 
-	i = 0;
-	lon = 0;
-	if (!s1 || !s2)
+	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	result = (char *)malloc(sizeof(*result)* \
-	(ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!result)
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = (char *)malloc(len + 1);
+	if (!str)
 		return (NULL);
-	result = ft_join(i, result, s1, s2);
-	return (result);
+	res = str;
+	while (*s1)
+	{
+		*str = *s1;
+		str++;
+		s1++;
+	}
+	while (*s2)
+	{
+		*str = *s2;
+		str++;
+		s2++;
+	}
+	*str = '\0';
+	return (res);
 }

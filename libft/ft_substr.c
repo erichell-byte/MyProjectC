@@ -12,10 +12,21 @@
 
 #include "libft.h"
 
+static int	ft_len(char const *s, unsigned int start, size_t len)
+{
+	size_t	l;
+
+	l = ft_strlen(s + start);
+	if (l >= len)
+		l = len;
+	return (l);
+}
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned long int	i;
+	size_t				i;
 	char				*low;
+	size_t				l;
 
 	i = 0;
 	if (!s)
@@ -26,12 +37,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		low[0] = '\0';
 		return (low);
 	}
-	if (len > ft_strlen(s))
-		len = ft_strlen(s);
-	low = (char *)malloc(sizeof(char) * len + 1);
+	l = ft_len(s, start, len);
+	low = (char *)malloc(sizeof(char) * l + 1);
 	if (!low)
 		return (NULL);
-	while (i < len)
+	while (i < l)
 	{
 		low[i] = s[start];
 		i++;
@@ -40,10 +50,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	low[i] = '\0';
 	return (low);
 }
-
-// int main()
-// {
-// 	char *s;
-// 	s = ft_substr("tripouille", 0, 42000);
-// 	printf("%s", s);
-// }

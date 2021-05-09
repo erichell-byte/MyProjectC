@@ -36,3 +36,9 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (NULL);
 }
+
+int main()
+{
+	printf("%s",strrchr("helioa", 300));
+
+}

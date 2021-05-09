@@ -1,108 +1,60 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: erichell <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/19 21:28:08 by erichell          #+#    #+#             */
-/*   Updated: 2021/04/19 21:28:11 by erichell         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 
-static char	*ft_newstring(void)
+static int	ft_found_char(char c, char const *set)
 {
-	char	*low;
-
-	low = malloc(sizeof(char) * 1);
-	if (!low)
-		return (NULL);
-	ft_bzero(low, 1);
-	return (low);
-}
-
-static int	ft_search_v(char const *s1, char const *set)
-{
-	int					i;
-	int					k;
-	unsigned long int	symb;
-
-	i = 0;
-	k = 0;
-	symb = 0;
-	while (s1[i] && set[k])
+	while (*set)
 	{
-		if (symb == ft_strlen(s1) - 1)
-			return (0);
-		while (s1[i] == set[k])
-		{
-			i++;
-			symb++;
-		}
-		k = 0;
-		while (s1[i] != set[k])
-		{
-			k++;
-			if (set[k] == '\0')
-				return (symb);
-		}
+		if (c == *set)
+			return (1);
+		set++;
 	}
-	return (symb);
+	return (0);
 }
 
-static int	ft_search_n(char const *s1, char const *set)
+static char	*ft_new_str(char const *s1, size_t start, size_t end)
 {
-	int					i;
-	int					k;
-	unsigned long int	symb;
+	size_t	i;
+	char	*s2;
 
-	i = ft_strlen(s1) - 1;
-	k = 0;
-	symb = 0;
-	while (i > 0 && symb < ft_strlen(s1) - 1 && set[k] !='\0')
-	{	
-		while (s1[i] == set[k] && i >= 0)
-		{
-			i--;
-			symb++;
-		}
-		k = 0;
-		while (s1[i] != set[k])
-		{
-			k++;
-			if (set[k] == '\0')
-				return (symb);
-		}
+	s2 = (char *)malloc(sizeof(char) * (end - start + 2));
+	if (!s2)
+		return (0);
+	i = 0;
+	while (start <= end)
+	{
+		s2[i] = s1[start];
+		i++;
+		start++;
 	}
-	return (symb);
+	s2[i] = 0;
+	return (s2);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		s;
-	int		e;
-	int		l;
-	int		k;
-	char	*low;
+	size_t	i;
+	size_t	start;
+	char	*s2;
 
-	if (!s1 || !set)
-		return (NULL);
-	e = ft_search_v(s1, set);
-	l = ft_strlen(s1);
-	if (e == l)
-		return (ft_newstring());
-	s = ft_search_n(s1, set);
-	k = 0;
-	low = (char *)malloc(sizeof(char) * ((ft_strlen(s1) + 1) - \
-	(ft_search_n(s1, set) + ft_search_v(s1, set))));
-	if (!low)
-		return (NULL);
-	while (e < (l - s))
+	i = 0;
+	while (s1 && s1[i] && ft_found_char(s1[i], set))
+		i++;
+	if (s1 && s1[i])
 	{
-		low[k++] = s1[e++];
+		start = i;
+		i = ft_strlen(s1) - 1;
+		while (s1[i] && ft_found_char(s1[i], set))
+			i--;
+		s2 = ft_new_str(s1, start, i);
+		if (!s2)
+			return (0);
 	}
-	low[k] = '\0';
-	return (low);
+	else
+	{
+		s2 = (char *)malloc(sizeof(char));
+		if (!s2)
+			return (0);
+		s2[0] = 0;
+	}
+	return (s2);
 }

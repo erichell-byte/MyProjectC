@@ -18,10 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 	arr = (char *)malloc(count * size);
 	if (!arr)
-	{
 		return (NULL);
-		errno = ENOMEM;
-	}
 	ft_bzero(arr, count * size);
 	return (arr);
 }
