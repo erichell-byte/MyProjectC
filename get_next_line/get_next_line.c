@@ -113,11 +113,11 @@ int	get_next_line(int fd, char **line)
 
 // 	l = 1;
 // 	fd = 0;
-// 	fd = open("text.txt", O_RDONLY);
+// 	fd = open("test.txt", O_RDONLY);
 // 	while(l > 0)
 // 	{
 // 		l = get_next_line(fd, &line);
-// 		printf("gnl=%d", l);
+// 		printf("gnl=%d  ", l);
 // 		printf("%s\n", line);
 // 	}
 // }
