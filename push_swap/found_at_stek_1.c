@@ -109,4 +109,3 @@ int	found_mid_and_less(t_struct *head, t_main *base)
 	}
 	return (0);
 }
-

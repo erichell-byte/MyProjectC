@@ -51,9 +51,6 @@ int	five_and_less_b(t_struct **head_b, t_struct **head_a, t_main *base)
 			four_elem_b(head_b, head_a, base);
 		else if (ft_lstsize(*head_b) == 5)
 		{
-//			while ((*head_b)->order != base->next)
-//				rb(head_b);
-//			base->next++;
 			pa(head_b, head_a, *base);
 			four_elem_b(head_b, head_a, base);
 			pb(head_a, head_b);

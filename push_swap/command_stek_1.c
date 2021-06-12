@@ -26,20 +26,19 @@ void	sb(t_struct **head_stek_b)
 
 void	ss(t_struct **head_stek_a, t_struct **head_stek_b)
 {
-    t_struct	*tmp;
-    t_struct	*temp;
+	t_struct	*tmp;
+	t_struct	*temp;
 
-    temp = NULL;
-    tmp = NULL;
-
-    tmp = (*head_stek_a);
-    (*head_stek_a) = (*head_stek_a)->next;
-    tmp->next = tmp->next->next;
-    (*head_stek_a)->next = tmp;
-    temp = (*head_stek_b);
-    (*head_stek_b) = (*head_stek_b)->next;
-    temp->next = temp->next->next;
-    (*head_stek_b)->next = temp;
+	temp = NULL;
+	tmp = NULL;
+	tmp = (*head_stek_a);
+	(*head_stek_a) = (*head_stek_a)->next;
+	tmp->next = tmp->next->next;
+	(*head_stek_a)->next = tmp;
+	temp = (*head_stek_b);
+	(*head_stek_b) = (*head_stek_b)->next;
+	temp->next = temp->next->next;
+	(*head_stek_b)->next = temp;
 	ft_putstr("ss");
 }
 

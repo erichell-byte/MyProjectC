@@ -62,21 +62,27 @@ void			sort_at_stek_b(t_struct **head_a, \
 t_struct **head_b, t_main *base);
 void			second_corr_stek_a(t_struct **head_a, \
 t_struct **head_b, t_main *base);
-int				five_and_less_a(t_struct **head_a, t_struct **head_b, t_main *base);
-int				step_one_and_two(t_struct **head_a, t_struct **head_b, t_main *base, int i);
+int				five_and_less_a(t_struct **head_a, \
+t_struct **head_b, t_main *base);
+int				step_one_and_two(t_struct **head_a, \
+t_struct **head_b, t_main *base, int i);
 void			three_elem_a(t_struct **head_a);
-void            step_three(t_struct **head_a, t_struct **head_b, t_main *base);
-void            step_five(t_struct **head_a, t_struct **head_b, t_main *base);
-void            step_four(t_struct **head_a, t_struct **head_b, t_main *base, int i);
-void            step_six(t_struct **head_a, t_struct **head_b, t_main *base);
-char            **ft_split(char const *s, char c);
-char            *ft_strchr(const char *s, int c);
-int             ft_argv_len(char **argv);
-size_t          ft_strlcpy(char *dst, const char *src, size_t size);
-size_t          ft_strlen(const char *s);
-void            quesort(int *arr, int left, int right);
-void            three_elem_b(t_struct **head_b);
-static void     four_elem_b(t_struct **head_b, t_struct **head_a, t_main *base);
-int             five_and_less_b(t_struct **head_b, t_struct **head_a, t_main *base);
+void			step_three(t_struct **head_a, \
+t_struct **head_b, t_main *base);
+void			step_five(t_struct **head_a, t_struct **head_b, t_main *base);
+void			step_four(t_struct **head_a, \
+t_struct **head_b, t_main *base, int i);
+void			step_six(t_struct **head_a, \
+t_struct **head_b, t_main *base, int i);
+char			**ft_split(char const *s, char c);
+char			*ft_strchr(const char *s, int c);
+int				ft_argv_len(char **argv);
+size_t			ft_strlcpy(char *dst, const char *src, size_t size);
+size_t			ft_strlen(const char *s);
+void			quesort(int *arr, int left, int right);
+void			three_elem_b(t_struct **head_b);
+int				five_and_less_b(t_struct **head_b, \
+t_struct **head_a, t_main *base);
+char			**ft_free_strok(char **res, int i);
 
 #endif

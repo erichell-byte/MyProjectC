@@ -1,89 +1,87 @@
 #include "push_swap.h"
 
-static char			**ft_malloc_error(char **tab)
+static int	ft_whostrok(char const *s, char c)
 {
-    unsigned int	i;
+	int	i;
+	int	strok;
 
-    i = 0;
-    while (tab[i])
-    {
-        free(tab[i]);
-        i++;
-    }
-    free(tab);
-    return (NULL);
+	i = 0;
+	strok = 0;
+	while (s[0] && s[0] == c)
+		s++;
+	while (s[0])
+	{
+		while (s[0] && s[0] != c)
+			s++;
+		while (s[0] && s[0] == c)
+			s++;
+		strok++;
+	}
+	return (strok);
 }
 
-static unsigned int	ft_get_nb_strs(char const *s, char c)
+static int	ft_symbols(char const *s, char c)
 {
-    unsigned int	i;
-    unsigned int	nb_strs;
+	int	len;
 
-    if (!s[0])
-        return (0);
-    i = 0;
-    nb_strs = 0;
-    while (s[i] && s[i] == c)
-        i++;
-    while (s[i])
-    {
-        if (s[i] == c)
-        {
-            nb_strs++;
-            while (s[i] && s[i] == c)
-                i++;
-            continue ;
-        }
-        i++;
-    }
-    if (s[i - 1] != c)
-        nb_strs++;
-    return (nb_strs);
+	len = 0;
+	while (*s == c)
+		s++;
+	while ((*s != c) && *s)
+	{
+		s++;
+		len++;
+	}
+	return (len);
 }
 
-static void			ft_get_next_str(char **next_str, unsigned int *next_str_len,
-                                       char c)
+char	**ft_free_strok(char **res, int i)
 {
-    unsigned int i;
-
-    *next_str += *next_str_len;
-    *next_str_len = 0;
-    i = 0;
-    while (**next_str && **next_str == c)
-        (*next_str)++;
-    while ((*next_str)[i])
-    {
-        if ((*next_str)[i] == c)
-            return ;
-        (*next_str_len)++;
-        i++;
-    }
+	while (i >= 0)
+	{
+		free(res[i]);
+		i--;
+	}
+	free(res);
+	return (NULL);
 }
 
-char				**ft_split(char const *s, char c)
+static char	**ft_job(char **res, int strok, char const *s, char c)
 {
-    char			**tab;
-    char			*next_str;
-    unsigned int	next_str_len;
-    unsigned int	nb_strs;
-    unsigned int	i;
+	int	i;
+	int	l;
 
-    if (!s)
-        return (NULL);
-    nb_strs = ft_get_nb_strs(s, c);
-    if (!(tab = (char **)malloc(sizeof(char *) * (nb_strs + 1))))
-        return (NULL);
-    i = 0;
-    next_str = (char *)s;
-    next_str_len = 0;
-    while (i < nb_strs)
-    {
-        ft_get_next_str(&next_str, &next_str_len, c);
-        if (!(tab[i] = (char *)malloc(sizeof(char) * (next_str_len + 1))))
-            return (ft_malloc_error(tab));
-        ft_strlcpy(tab[i], next_str, next_str_len + 1);
-        i++;
-    }
-    tab[i] = NULL;
-    return (tab);
+	i = 0;
+	while (i < strok)
+	{
+		res[i] = ((char *)malloc(sizeof(char)*(ft_symbols(s, c) + 1)));
+		if (!res[i])
+			return (ft_free_strok(res, i));
+		while (*s == c)
+			s++;
+		l = 0;
+		while (*s && (*s != c))
+			res[i][l++] = *s++;
+		res[i][l] = '\0';
+		i++;
+	}
+	res[i] = 0;
+	return (res);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	int		strok;
+	char	**res;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	strok = ft_whostrok(s, c);
+	res = (char **)malloc((strok + 1)* sizeof(char *));
+	if (!res)
+		return (NULL);
+	res = ft_job(res, strok, s, c);
+	return (res);
 }
