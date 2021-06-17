@@ -53,7 +53,7 @@ int	checker_sort(int *arr, int *arr_sort, int size)
 	{
 		if (arr[i] == arr_sort[i])
 			i++;
-		if (arr[i] != arr_sort[i])
+		if (arr[i] != arr_sort[i] && i < size)
 			return (0);
 	}
 	return (1);
