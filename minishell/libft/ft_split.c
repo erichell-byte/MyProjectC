@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cdelaine <cdelaine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/18 12:49:11 by cdelaine          #+#    #+#             */
+/*   Updated: 2021/11/18 12:49:27 by cdelaine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_whostrok(char const *s, char c)
@@ -54,7 +66,7 @@ static char	**ft_job(char **res, int strok, char const *s, char c)
 	i = 0;
 	while (i < strok)
 	{
-		res[i] = ((char *)malloc(sizeof(char)*(ft_symbols(s, c) + 1)));
+		res[i] = ((char *)malloc(sizeof(char) * (ft_symbols(s, c) + 1)));
 		if (!res[i])
 			return (ft_free_strok(res, i));
 		while (*s == c)
@@ -79,7 +91,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	strok = ft_whostrok(s, c);
-	res = (char **)malloc((strok + 1)* sizeof(char *));
+	res = (char **)malloc((strok + 1) * sizeof(char *));
 	if (!res)
 		return (NULL);
 	res = ft_job(res, strok, s, c);

@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdelaine <cdelaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 12:49:19 by cdelaine          #+#    #+#             */
-/*   Updated: 2021/11/18 12:49:27 by cdelaine         ###   ########.fr       */
+/*   Created: 2021/11/18 12:40:43 by cdelaine          #+#    #+#             */
+/*   Updated: 2021/11/18 12:41:33 by cdelaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strnstr(const char *big, const char *lit, size_t len)
+void	print_envp(t_env *envp, int fd)
 {
-	size_t	x;
-	size_t	y;
+	t_env	*tmp;
 
-	x = 0;
-	if (*lit == '\0')
-		return ((char *)big);
-	while (big[x] != '\0' && x < len)
+	tmp = envp;
+	while (tmp)
 	{
-		y = 1;
-		if (big[x] == lit[0])
+		if (tmp->value)
 		{
-			while ((big[x + y] == lit[y])
-				&& (lit[y] != '\0') && x + y < len)
-				y++;
-			if (lit[y] == '\0')
-				return ((char *)&big[x]);
+			ft_putstr_fd(tmp->key, fd);
+			write(fd, "=", 1);
+			ft_putendl_fd(tmp->value, fd);
 		}
-		x++;
+		tmp = tmp->next;
 	}
-	return (NULL);
+}
+
+int	comand_env(t_cmd *cmd, t_env *env)
+{
+	print_envp(env, cmd->fd_out);
+	return (0);
 }

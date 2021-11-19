@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   parcer_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erichell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: erichell <erichell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/17 17:44:16 by erichell          #+#    #+#             */
-/*   Updated: 2021/04/17 17:44:17 by erichell         ###   ########.fr       */
+/*   Created: 2021/11/18 13:11:51 by erichell          #+#    #+#             */
+/*   Updated: 2021/11/18 13:12:50 by erichell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_next_stage(t_cmd **new, int *i, t_iter *iter)
 {
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
+	(*new) = ft_lstnew_cmd((iter)->res);
+	(*i) = (iter)->len;
+	free_iter_res_or_word(iter);
 }
